@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 05</title>
+</head>
+<body>
+    <h1 id="reloj"></h1>
+    
+    <script>
+        // console.log('INICIO');
+
+        // for (let i = 0; i < 1000; i++) {
+        //     console.log('for');
+        // }
+
+        // console.log('MEDIO');
+
+        // console.log('FIN');
+
+        function obtenerHora () {
+            const d = new Date();
+            const hora = d.getHours();
+            let minutos = d.getMinutes();
+            if (minutos < 10) {
+                minutos = `0${minutos}`;
+            }
+            let segundos = d.getSeconds();
+            if (segundos < 10) {
+                segundos = `0${segundos}`;
+            }
+
+            return `${hora}:${minutos}:${segundos}`;
+        }
+
+        const reloj = document.getElementById('reloj');
+        
+
+        setInterval(() => {
+            reloj.textContent = obtenerHora();
+        }, 1000);
+
+        console.log('FIN');
+
+
+        // console.log('INICIO');
+
+        // setTimeout(() => {
+        //     console.log('setTimeout');
+        // }, 0);
+
+        // console.log('FIN');
+
+    </script>
+</body>
+</html>

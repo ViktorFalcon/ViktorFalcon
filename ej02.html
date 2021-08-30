@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 05 - Eje 01</title>
+    <link rel="stylesheet" href="css/lightbox.min.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #F2F2F2;
+        }
+
+        .producto {
+            width: 30%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 2px #777;
+            padding: 20px;
+        }
+
+        .producto .link {
+            display: none;
+        }
+
+        .producto .link:first-child {
+            display: block;
+        }
+
+        .producto .img {
+            width: 100%;
+        }
+
+        .producto .precio {
+            font-size: 20px;
+            font-weight: bold;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        .producto .precio-anterior {
+            display: block;
+            color: #777;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+
+        .producto .descuento {
+            font-size: 14px;
+            color: green;
+        }
+
+        .producto .cuotas {
+            display: block;
+            font-size: 14px;
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .producto .nombre {
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .producto .empresa {
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <section id="productos"></section>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    
+    <script>
+        const productos = document.getElementById('productos');
+
+        const producto = {
+            precioAnterior: '$97.499',
+            precio: '$78.999',
+            descuento: 18,
+            cuotas: 18,
+            nombre: 'Heladera Patrick HPK151M11 black steel con freezer 388L 220V',
+            empresa: 'Patrick',
+            imagenes: [
+                'https://http2.mlstatic.com/D_NQ_NP_602565-MLA32542008619_102019-W.webp',
+                'https://http2.mlstatic.com/D_646062-MLA32541827708_102019-O.jpg',
+                'https://http2.mlstatic.com/D_999738-MLA32541733836_102019-O.jpg'
+            ]
+        };
+
+        const p = document.createElement('article');
+        p.className = 'producto';
+        // Galeria
+
+        const galeria = document.createElement('div');
+        galeria.className = 'galeria';
+
+        for (let i = 0; i < producto.imagenes.length; i++) {
+            const link = document.createElement('a');
+            link.className = 'link';
+            link.href = producto.imagenes[i];
+            link.dataset.lightbox = 'galeria';
+            link.dataset.title = producto.nombre;
+            link.dataset.alt = producto.nombre;
+
+            const img = document.createElement('img');
+            img.className = 'img';
+            img.src = producto.imagenes[i];
+
+            link.append(img);
+
+            galeria.append(link);
+        }        
+
+        const precioAnterior = document.createElement('span');
+        precioAnterior.className = 'precio-anterior';
+        precioAnterior.textContent = producto.precioAnterior;
+
+        const precio = document.createElement('span');
+        precio.className = 'precio';
+        precio.textContent = producto.precio;
+
+        const descuento = document.createElement('span');
+        descuento.className = 'descuento';
+        descuento.textContent = `${producto.descuento}% OFF`;
+
+        const cuotas = document.createElement('span');
+        cuotas.className = 'cuotas';
+        cuotas.textContent = `Hasta ${producto.cuotas} cuotas sin interes`;
+
+        const nombre = document.createElement('h2');
+        nombre.className = 'nombre';
+        nombre.textContent = producto.nombre;
+
+        const empresa = document.createElement('span');
+        empresa.className = 'empresa';
+        empresa.textContent = `Por ${producto.empresa}`;
+
+        p.append(galeria, precioAnterior, precio, descuento, cuotas, nombre, empresa);
+
+        productos.appendChild(p);
+    </script>
+</body>
+</html>

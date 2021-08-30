@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 05 - Eje 02</title>
+    <link rel="stylesheet" href="css/lightbox.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <section id="productos"></section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    
+    <script>
+        const sectionProductos = document.getElementById('productos');
+
+        const productos = [
+            {
+                id: 1,
+                precioAnterior: '$97.499',
+                precio: '$78.999',
+                descuento: 18,
+                cuotas: 18,
+                nombre: 'Heladera Patrick HPK151M11 black steel con freezer 388L 220V',
+                empresa: 'Patrick',
+                imagenes: [
+                    'https://http2.mlstatic.com/D_NQ_NP_602565-MLA32542008619_102019-W.webp',
+                    'https://http2.mlstatic.com/D_646062-MLA32541827708_102019-O.jpg',
+                    'https://http2.mlstatic.com/D_999738-MLA32541733836_102019-O.jpg'
+                ]
+            },
+            {
+                id: 2,
+                precio: '$49.999',
+                cuotas: 12,
+                nombre: 'Heladera Gafa HGF357AF blanca con freezer 282L 220V',
+                empresa: 'Fravega',
+                imagenes: [
+                    'https://http2.mlstatic.com/D_NQ_NP_852497-MLA32566609369_102019-W.webp',
+                    'https://http2.mlstatic.com/D_686897-MLA32557197254_102019-O.jpg',
+                    'https://http2.mlstatic.com/D_726691-MLA32557437038_102019-O.jpg'
+                ]
+            },
+            {
+                id: 3,
+                precio: '$40.574',
+                nombre: 'Heladera Patrick HPK135 blanca con freezer 264L 220V',
+                imagenes: [
+                    'https://http2.mlstatic.com/D_NQ_NP_965028-MLA32542008594_102019-W.webp',
+                    'https://http2.mlstatic.com/D_813359-MLA32541733810_102019-O.jpg',
+                    'https://http2.mlstatic.com/D_931303-MLA32541827685_102019-O.jpg'
+                ]
+            }
+        ];
+
+        function crearGaleria (id, imagenes, nombre) {
+            const galeria = document.createElement('div');
+            galeria.className = 'galeria';
+
+            for (let i = 0; i < imagenes.length; i++) {
+                const link = document.createElement('a');
+                link.className = 'link';
+                link.href = imagenes[i];
+                link.dataset.lightbox = `galeria-${id}`;
+                link.dataset.title = nombre;
+                link.dataset.alt = nombre;
+
+                const img = document.createElement('img');
+                img.className = 'img';
+                img.src = imagenes[i];
+
+                link.append(img);
+
+                galeria.append(link);
+            }
+
+            return galeria;
+        }
+
+        function crearProducto (producto) {
+            const p = document.createElement('article');
+            p.className = 'producto';
+
+            const galeria = crearGaleria(
+                producto.id,
+                producto.imagenes,
+                producto.nombre
+            );
+            p.append(galeria);
+
+            if (producto.precioAnterior) {
+                const precioAnterior = document.createElement('span');
+                precioAnterior.className = 'precio-anterior';
+                precioAnterior.textContent = producto.precioAnterior;
+                p.append(precioAnterior);
+            }
+
+            const precio = document.createElement('span');
+            precio.className = 'precio';
+            precio.textContent = producto.precio;
+            p.append(precio);
+
+            if (producto.descuento) {
+                const descuento = document.createElement('span');
+                descuento.className = 'descuento';
+                descuento.textContent = `${producto.descuento}% OFF`;
+                p.append(descuento);
+            }
+
+            if (producto.cuotas) {
+                const cuotas = document.createElement('span');
+                cuotas.className = 'cuotas';
+                cuotas.textContent = `Hasta ${producto.cuotas} cuotas sin interes`;
+                p.append(cuotas);
+            }
+
+            const nombre = document.createElement('h2');
+            nombre.className = 'nombre';
+            nombre.textContent = producto.nombre;
+            p.append(nombre);
+
+            if (producto.empresa) {
+                const empresa = document.createElement('span');
+                empresa.className = 'empresa';
+                empresa.textContent = `Por ${producto.empresa}`;
+                p.append(empresa);
+            }
+
+            const boton = document.createElement('comprar');
+            boton.className = 'comprar';
+            boton.textContent = 'Comprar';
+            boton.addEventListener('click', e => {
+                p.classList.add('vendido');
+                alert(`Compraste el producto ${producto.id}`);
+            });
+            p.append(boton);
+
+            return p;
+        }
+
+        function mostrarProductos() {
+            const fragmento = document.createDocumentFragment()
+            for (let i = 0; i < productos.length; i++) {
+                fragmento.append(crearProducto(productos[i]));
+            }
+            sectionProductos.append(fragmento);
+        }
+
+        mostrarProductos();
+    </script>
+</body>
+</html>

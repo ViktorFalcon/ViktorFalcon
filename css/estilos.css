@@ -1,0 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F2F2F2;
+}
+
+#productos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.producto {
+    width: 25%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 2px #777;
+    padding: 20px;
+}
+
+.producto.vendido {
+    background-color: pink;
+}
+
+.producto.vendido .comprar {
+    display: none;
+}
+
+.producto .link {
+    display: none;
+}
+
+.producto .link:first-child {
+    display: block;
+}
+
+.producto .img {
+    width: 100%;
+}
+
+.producto .precio {
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.producto .precio-anterior {
+    display: block;
+    color: #777;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.producto .descuento {
+    font-size: 14px;
+    color: green;
+}
+
+.producto .cuotas {
+    display: block;
+    font-size: 14px;
+    color: green;
+    margin-bottom: 10px;
+}
+
+.producto .nombre {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.producto .empresa {
+    font-size: 12px;
+    color: #777;
+}
+
+.producto .comprar {
+    display: block;
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: orange;
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.producto .comprar:hover {
+    background-color: black;
+    color: orange;
+}
